@@ -9,6 +9,7 @@ module;
 #include <netinet/in.h>
 #include <unistd.h>
 #endif
+#include <fstream>
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -141,7 +142,6 @@ namespace NetworkUtils
 		}
 	};
 
-
 	export class ClientUtil
 	{
 	private:
@@ -149,6 +149,12 @@ namespace NetworkUtils
 
 	public:
 		ClientUtil() = default;
+
+        explicit ClientUtil(const int clientSocket)
+	    {
+			this->clientSocket = clientSocket;
+		}
+
 	    int createSocket()
 		{
 			NetworkUtils::setup();
@@ -182,7 +188,6 @@ namespace NetworkUtils
 
 		void communicate() const
 		{
-			
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			const auto message = "Hello, server_util!";
@@ -196,4 +201,6 @@ namespace NetworkUtils
 			std::cout << "Server message: " << buffer << std::endl;
 		}
 	};
+
+	
 }

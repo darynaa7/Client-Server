@@ -20,7 +20,7 @@ namespace Network
         {
             const auto serverUtil = new NetworkUtils::ServerUtil();
             if( serverSocket = serverUtil->createSocket(); !serverSocket ) return;
-            auto bind = serverUtil->bindServerAddress();
+            const auto bind = serverUtil->bindServerAddress();
             serverUtil->listenForServerSocket();
 
             if( clientSocket = serverUtil->connectToClientSocket(bind); !clientSocket ) return;
@@ -47,7 +47,17 @@ namespace Network
             const auto clientUtil = new NetworkUtils::ClientUtil();
             if( clientSocket = clientUtil->createSocket(); !clientSocket ) return;
             clientUtil->connectToServerSocket(clientUtil->bindClientAddress());
+        }
+
+        void sendMessages() const
+        {
+            const auto clientUtil = new NetworkUtils::ClientUtil(clientSocket);
             clientUtil->communicate();
+        }
+
+        void sendImage(FILE* imageFile) const
+        {
+            
         }
 
         void closeConnection() const
