@@ -1,6 +1,7 @@
 # Client-Server
 Simple client server application, where client can do "print-screen" each 60 seconds (loop for 4 times).
 Screenshots are stored in Client app folder.
+Works both for Windows and Linux(I hope so, can`t check;__))
 
 Server.cpp -  use network.ixx to do server part
 
