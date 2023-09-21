@@ -8,4 +8,5 @@ int main()
     const auto server = new Server();
 
     server->createConnection();
+    server->closeConnection();
 }

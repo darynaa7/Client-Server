@@ -2,6 +2,7 @@ module;
 
 #include <iostream>
 #include <vector>
+#include <winsock2.h>
 
 export module Network;
 import NetworkUtils;
@@ -53,7 +54,7 @@ namespace Network
 
         void sendImage(FILE* imageFile) const
         {
-            // func will send screenshots to server
+           
         }
 
         void closeConnection() const

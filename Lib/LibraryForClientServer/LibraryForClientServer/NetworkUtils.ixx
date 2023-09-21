@@ -103,6 +103,7 @@ namespace NetworkUtils
 		int connectToClientSocket(sockaddr_in serverAddress) 
 		{
 			socklen_t addressLength = sizeof(serverAddress);
+			std::cout << " waiting for connection...\n";
 			clientSocket = accept(serverSocket, reinterpret_cast<struct sockaddr *>(&serverAddress), &addressLength);
 			if( clientSocket == INVALID_SOCKET )
 			{
@@ -117,7 +118,7 @@ namespace NetworkUtils
 			//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			char buffer[1024] = { 0 };
 			receive(clientSocket, buffer, 1024, 0);
-			std::cout << "connection...\nClient message: " << buffer << std::endl;
+			std::cout << "connection...\nClient message: " << buffer << "\n";
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			
 			const auto message = "Hello, client_util!\n";
@@ -169,14 +170,14 @@ namespace NetworkUtils
 		void communicate() const
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-			const auto message = "Hello, server_util!";
+			const auto message = "Hello, server_util!\n";
 			send(clientSocket, message, strlen(message), 0);
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 			char buffer[1024] = { 0 };
 			NetworkUtils::receive(clientSocket, buffer, 1024, 0);
-			std::cout << "Server message: " << buffer << std::endl;
+			std::cout << "Server message: " << buffer << "\n";
 		}
 	};
 }

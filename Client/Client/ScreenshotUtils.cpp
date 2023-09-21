@@ -22,26 +22,26 @@ FILE* ScreenshotUtils::captureAndSaveScreenshot()
 
                 const std::filesystem::path currentPath = std::filesystem::current_path();
 				std::error_code ec;
-
+				static int screenshotNumber = 1;
 				SYSTEMTIME st;
 				GetSystemTime(&st);
 				char fileName[100];
-				sprintf_s(fileName, "%04d%02d%02d_%02d%02d%02d.png", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
+				sprintf_s(fileName, "%02.d%02.d%04d_%02d.png", st.wDay, st.wMonth, st.wYear, screenshotNumber);
 
 				const auto filePath = currentPath / fileName;
-
+				
 				return saveBitmapToFile(buffer, filePath.string().c_str(), width, height);
 
 				delete[] buffer;
 
-				std::cout << "Image saved to: " << filePath << std::endl;
+				std::cout << "Image saved to: " << filePath << "\n";
 			}
 		}
 		CloseClipboard();
 	}
 	else
 	{
-		std::cerr << "Failed to open clipboard." << std::endl;
+		std::cerr << "Failed to open clipboard." << "\n";
 	}
 	return nullptr;
 }
@@ -81,7 +81,7 @@ FILE* ScreenshotUtils::saveBitmapToFile(const BYTE* buffer, const char* filePath
 	fopen_s(&imageFile, filePath, "wb");
 	if( !imageFile )
 	{
-		std::cerr << "Failed to open file for writing: " << filePath << std::endl;
+		std::cerr << "Failed to open file for writing: " << filePath << "\n";
 		return nullptr;
 	}
 
