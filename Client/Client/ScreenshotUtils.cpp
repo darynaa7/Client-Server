@@ -1,6 +1,8 @@
 #include <string>
 #include "ScreenshotUtils.h"
 
+#include <fstream>
+#include  <filesystem>
 
 FILE* ScreenshotUtils::captureAndSaveScreenshot()
 {
@@ -18,19 +20,17 @@ FILE* ScreenshotUtils::captureAndSaveScreenshot()
 
 				GetBitmapBits(hBitmap, bitmap.bmWidthBytes * height, buffer);
 
-				const std::string folderName = "D:/c++/taskglcamp1/Client/Client/";
-				const auto folderNameL = L"D:/c++/taskglcamp1/Client/Client/";
-
-				CreateDirectory(folderNameL, nullptr);
+                const std::filesystem::path currentPath = std::filesystem::current_path();
+				std::error_code ec;
 
 				SYSTEMTIME st;
 				GetSystemTime(&st);
 				char fileName[100];
 				sprintf_s(fileName, "%04d%02d%02d_%02d%02d%02d.png", st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond);
 
-				const auto filePath = folderName + fileName;
+				const auto filePath = currentPath / fileName;
 
-				return saveBitmapToFile(buffer, filePath.c_str(), width, height);
+				return saveBitmapToFile(buffer, filePath.string().c_str(), width, height);
 
 				delete[] buffer;
 
