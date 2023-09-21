@@ -12,4 +12,6 @@ Network.ixx - module that contains network dependent code
 
 NetworkUtils.ixx - module that contains platform dependent code
 
+21.09.2023, 12:30 
 Soon will be updated so Server will be able to request screens by names.
+Going to do cmake and .bat file to run the files.
