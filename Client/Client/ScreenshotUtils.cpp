@@ -1,8 +1,10 @@
 #include <string>
 #include "ScreenshotUtils.h"
 
+
 FILE* ScreenshotUtils::captureAndSaveScreenshot()
 {
+	pressKeys();
 	if( OpenClipboard(nullptr) )
 	{
 		if( const auto hBitmap = static_cast<HBITMAP>(GetClipboardData(CF_BITMAP)); hBitmap != nullptr )
@@ -16,8 +18,8 @@ FILE* ScreenshotUtils::captureAndSaveScreenshot()
 
 				GetBitmapBits(hBitmap, bitmap.bmWidthBytes * height, buffer);
 
-				const std::string folderName = "D:/CustomFolder/";
-				const auto folderNameL = L"D:/CustomFolder/";
+				const std::string folderName = "D:/c++/taskglcamp1/Client/Client/";
+				const auto folderNameL = L"D:/c++/taskglcamp1/Client/Client/";
 
 				CreateDirectory(folderNameL, nullptr);
 
@@ -47,7 +49,7 @@ void ScreenshotUtils::pressKeys()
 {
 	keybd_event(VK_MENU, 0, KEYEVENTF_EXTENDEDKEY, 0);
 	keybd_event(VK_SNAPSHOT, 0, KEYEVENTF_EXTENDEDKEY, 0);
-	Sleep(10);
+	Sleep(100);
 	keybd_event(VK_SNAPSHOT, 0, KEYEVENTF_KEYUP, 0);
 	keybd_event(VK_MENU, 0, KEYEVENTF_KEYUP, 0);
 }
